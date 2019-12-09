@@ -1,4 +1,4 @@
-package com.cashback.usecase.album.search.repository;
+package com.cashback.usecase.album.search.repository.albums;
 
 public interface FindAlbums {
 

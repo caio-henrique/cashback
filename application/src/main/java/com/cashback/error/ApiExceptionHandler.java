@@ -1,5 +1,6 @@
 package com.cashback.error;
 
+import com.cashback.common.exception.BusinessException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -57,15 +59,27 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-//    @ExceptionHandler(BusinessException.class)
-//    public ResponseEntity<ErrorResponse> handlerBusinessException(BusinessException exception, Locale locale) {
-//
-//        final String errorCode = exception.getCode();
-//        final HttpStatus status = exception.getStatus();
-//        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale));
-//
-//        return ResponseEntity.badRequest().body(errorResponse);
-//    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handlerInvalidFormatException(ConstraintViolationException exception,
+                                                                       Locale locale) {
+
+        final String errorCode = "generic-1";
+        final HttpStatus status = HttpStatus.BAD_REQUEST;
+        List<String> erros = exception.getConstraintViolations().parallelStream().map(x -> x.getMessage()).collect(Collectors.toList());
+        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale, erros));
+
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErrorResponse> handlerBusinessException(BusinessException exception, Locale locale) {
+
+        final String errorCode = exception.getCode();
+        final HttpStatus status = exception.getStatus();
+        final ErrorResponse errorResponse = ErrorResponse.of(status, toApiError(errorCode, locale));
+
+        return ResponseEntity.status(status).body(errorResponse);
+    }
 
     public ErrorResponse.ApiError toApiError(String code, Locale locale, Object... args) {
 
