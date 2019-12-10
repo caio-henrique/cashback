@@ -1,4 +1,4 @@
-package com.cashback.usecase.sale.find.representation;
+package com.cashback.usecase.sale.create.representation;
 
 import org.springframework.context.annotation.Bean;
 
@@ -10,10 +10,12 @@ public class Product implements Serializable {
 
     private String description;
     private BigDecimal price;
+    private BigDecimal cashback;
 
-    private Product(String description, BigDecimal price) {
+    private Product(String description, BigDecimal price, BigDecimal cashback) {
         this.description = description;
         this.price = price;
+        this.cashback = cashback;
     }
 
     public String getDescription() {
@@ -24,10 +26,14 @@ public class Product implements Serializable {
         return price;
     }
 
-    @Bean
-    public static Product valueOf(String description, BigDecimal price) {
+    public BigDecimal getCashback() {
+        return cashback;
+    }
 
-        return new Product(description, price);
+    @Bean
+    public static Product valueOf(String description, BigDecimal price, BigDecimal cashback) {
+
+        return new Product(description, price, cashback);
     }
 
     @Override
@@ -36,12 +42,13 @@ public class Product implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
         return Objects.equals(description, product.description) &&
-                Objects.equals(price, product.price);
+                Objects.equals(price, product.price) &&
+                Objects.equals(cashback, product.cashback);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, price);
+        return Objects.hash(description, price, cashback);
     }
 
     @Override
@@ -49,6 +56,7 @@ public class Product implements Serializable {
         return "Product{" +
                 "description='" + description + '\'' +
                 ", price=" + price +
+                ", cashback=" + cashback +
                 '}';
     }
 }

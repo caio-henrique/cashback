@@ -5,6 +5,6 @@ import org.springframework.http.HttpStatus;
 public class ResourceNotFoundException extends BusinessException {
 
     public ResourceNotFoundException() {
-        super("resource-not-found-1", HttpStatus.NOT_FOUND);
+        super("error-resource-not-found", HttpStatus.NOT_FOUND);
     }
 }

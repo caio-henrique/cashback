@@ -1,4 +1,4 @@
-package com.cashback.usecase.album;
+package com.cashback.usecase.album.find;
 
 import com.cashback.integration.search.SearchIntegration;
 import com.cashback.integration.search.SearchIntegrationRequest;

@@ -2,9 +2,13 @@ package com.cashback.resource;
 
 import com.cashback.usecase.sale.create.CreateSale;
 import com.cashback.usecase.sale.create.CreateSaleRequest;
-import com.cashback.usecase.sale.find.FindSales;
-import com.cashback.usecase.sale.find.FindSalesRequest;
-import com.cashback.usecase.sale.find.FindSalesResponse;
+import com.cashback.usecase.sale.create.CreateSaleResponse;
+import com.cashback.usecase.sale.find.sale.FindSale;
+import com.cashback.usecase.sale.find.sale.FindSaleRequest;
+import com.cashback.usecase.sale.find.sale.FindSaleResponse;
+import com.cashback.usecase.sale.find.sales.FindSales;
+import com.cashback.usecase.sale.find.sales.FindSalesRequest;
+import com.cashback.usecase.sale.find.sales.FindSalesResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,10 +24,12 @@ public class SalesResource {
 
     private FindSales findSales;
     private CreateSale createSale;
+    private FindSale findSale;
 
-    public SalesResource(FindSales findSales, CreateSale createSale) {
+    public SalesResource(FindSales findSales, CreateSale createSale, FindSale findSale) {
         this.findSales = findSales;
         this.createSale = createSale;
+        this.findSale = findSale;
     }
 
     @GetMapping
@@ -37,8 +43,14 @@ public class SalesResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void sellProduct(@RequestBody CreateSaleRequest createSaleRequest) {
+    public CreateSaleResponse sellProduct(@RequestBody CreateSaleRequest createSaleRequest) {
 
-        createSale.execute(createSaleRequest);
+        return createSale.execute(createSaleRequest);
+    }
+
+    @GetMapping("/{identifier}")
+    public FindSaleResponse findSale(@PathVariable Long identifier) {
+
+        return findSale.execute(FindSaleRequest.valueOf(identifier));
     }
 }

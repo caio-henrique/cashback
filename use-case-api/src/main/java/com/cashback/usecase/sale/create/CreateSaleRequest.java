@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.context.annotation.Bean;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 public class CreateSaleRequest implements Serializable {
 
-    @NotEmpty
+    @NotNull
     private List<Long> productIds;
 
     public CreateSaleRequest(List<Long> productIds) {

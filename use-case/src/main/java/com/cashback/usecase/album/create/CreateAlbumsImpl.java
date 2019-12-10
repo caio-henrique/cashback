@@ -1,4 +1,4 @@
-package com.cashback.usecase.album;
+package com.cashback.usecase.album.create;
 
 import com.cashback.common.enums.Gender;
 import com.cashback.repository.AlbumRepository;

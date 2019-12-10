@@ -1,11 +1,11 @@
-package com.cashback.usecase;
+package com.cashback.usecase.album;
 
 import com.cashback.common.enums.Gender;
 import com.cashback.integration.search.SearchIntegration;
 import com.cashback.integration.search.SearchIntegrationRequest;
 import com.cashback.integration.search.SearchIntegrationResponse;
 import com.cashback.integration.search.representation.Album;
-import com.cashback.usecase.album.SearchAlbumsSpotifyImpl;
+import com.cashback.usecase.album.find.SearchAlbumsSpotifyImpl;
 import com.cashback.usecase.album.search.spotify.SearchAlbumsSpotifyRequest;
 import com.cashback.usecase.album.search.spotify.SearchAlbumsSpotifyResponse;
 import org.junit.Before;

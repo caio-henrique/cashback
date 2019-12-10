@@ -1,4 +1,4 @@
-package com.cashback.usecase.sale.find.representation;
+package com.cashback.usecase.sale.find.sales.representation;
 
 import org.springframework.context.annotation.Bean;
 

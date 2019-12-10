@@ -1,4 +1,4 @@
-package com.cashback.usecase.album;
+package com.cashback.usecase.album.find;
 
 import com.cashback.repository.AlbumRepository;
 import com.cashback.repository.entity.Album;

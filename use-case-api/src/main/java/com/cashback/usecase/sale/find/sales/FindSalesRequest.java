@@ -1,4 +1,4 @@
-package com.cashback.usecase.sale.find;
+package com.cashback.usecase.sale.find.sales;
 
 import com.cashback.common.validator.ObjectValidator;
 import org.springframework.context.annotation.Bean;

@@ -7,6 +7,7 @@ import com.cashback.usecase.album.creation.representation.Album;
 import com.cashback.usecase.album.search.spotify.SearchAlbumsSpotify;
 import com.cashback.usecase.album.search.spotify.SearchAlbumsSpotifyRequest;
 import com.cashback.usecase.album.search.spotify.SearchAlbumsSpotifyResponse;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.EnumSet;
@@ -24,7 +25,7 @@ public class GenerateAlbumCatalog {
         this.createAlbums = createAlbums;
     }
 
-//    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 60000*60)
     public void execute() {
 
         EnumSet<Gender> genderEnumSet = EnumSet.allOf(Gender.class);

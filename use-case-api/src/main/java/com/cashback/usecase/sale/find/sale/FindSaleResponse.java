@@ -1,6 +1,6 @@
-package com.cashback.usecase.sale.create;
+package com.cashback.usecase.sale.find.sale;
 
-import com.cashback.usecase.sale.create.representation.Product;
+import com.cashback.usecase.sale.find.sale.representation.Product;
 import org.springframework.context.annotation.Bean;
 
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-public class CreateSaleResponse implements Serializable {
+public class FindSaleResponse implements Serializable {
 
     private Long id;
     private List<Product> products;
@@ -17,8 +17,7 @@ public class CreateSaleResponse implements Serializable {
     private BigDecimal cashback;
     private LocalDateTime createAt;
 
-    private CreateSaleResponse(Long id, List<Product> products, BigDecimal total,
-                               BigDecimal cashback, LocalDateTime createAt) {
+    private FindSaleResponse(Long id, List<Product> products, BigDecimal total, BigDecimal cashback, LocalDateTime createAt) {
         this.id = id;
         this.products = products;
         this.total = total;
@@ -47,17 +46,17 @@ public class CreateSaleResponse implements Serializable {
     }
 
     @Bean
-    public static CreateSaleResponse valueOf(Long id, List<Product> products, BigDecimal total,
-                               BigDecimal cashback, LocalDateTime createAt) {
+    public static FindSaleResponse valueOf(Long id, List<Product> products, BigDecimal total,
+                                           BigDecimal cashback, LocalDateTime createAt) {
 
-        return new CreateSaleResponse(id, products, total, cashback, createAt);
+        return new FindSaleResponse(id, products, total, cashback, createAt);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CreateSaleResponse that = (CreateSaleResponse) o;
+        FindSaleResponse that = (FindSaleResponse) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(products, that.products) &&
                 Objects.equals(total, that.total) &&
@@ -72,7 +71,7 @@ public class CreateSaleResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "CreateSaleResponse{" +
+        return "FindSaleResponse{" +
                 "id=" + id +
                 ", products=" + products +
                 ", total=" + total +

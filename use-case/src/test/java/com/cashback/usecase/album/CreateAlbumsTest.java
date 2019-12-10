@@ -1,8 +1,8 @@
-package com.cashback.usecase;
+package com.cashback.usecase.album;
 
 import com.cashback.common.enums.Gender;
 import com.cashback.repository.AlbumRepository;
-import com.cashback.usecase.album.CreateAlbumsImpl;
+import com.cashback.usecase.album.create.CreateAlbumsImpl;
 import com.cashback.usecase.album.creation.CreateAlbumsRequest;
 import com.cashback.usecase.album.creation.representation.Album;
 import org.junit.Before;
