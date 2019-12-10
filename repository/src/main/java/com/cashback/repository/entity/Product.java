@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "product")
+@Entity
 public class Product {
 
     @Id
@@ -16,8 +16,10 @@ public class Product {
 
     private BigDecimal price;
 
+    private BigDecimal cashback;
+
     @ManyToOne
-    @JoinColumn(name = "sale_code")
+    @JoinColumn(name = "sale_id")
     private Sale sale;
 
     @Column(name = "create_at")
@@ -45,6 +47,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public BigDecimal getCashback() {
+        return cashback;
+    }
+
+    public void setCashback(BigDecimal cashback) {
+        this.cashback = cashback;
     }
 
     public Sale getSale() {

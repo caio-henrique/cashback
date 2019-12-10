@@ -7,8 +7,6 @@ import com.cashback.usecase.album.search.repository.album.FindAlbumResponse;
 import com.cashback.usecase.album.search.repository.albums.FindAlbums;
 import com.cashback.usecase.album.search.repository.albums.FindAlbumsRequest;
 import com.cashback.usecase.album.search.repository.albums.FindAlbumsResponse;
-import com.cashback.usecase.album.search.repository.albums.representation.Album;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +27,9 @@ public class DiscCatalogResource {
     }
 
     @GetMapping
-    public Page<Album> findAlbums(Gender gender, @PageableDefault(size = 10) Pageable pageable) {
+    public FindAlbumsResponse findAlbums(Gender gender, @PageableDefault(size = 10) Pageable pageable) {
 
-        FindAlbumsResponse findAlbumsResponse = findAlbums.execute(FindAlbumsRequest.valueOf(gender, pageable));
-        return findAlbumsResponse.getAlbums();
+        return findAlbums.execute(FindAlbumsRequest.valueOf(gender, pageable));
     }
 
     @GetMapping("/{identifier}")

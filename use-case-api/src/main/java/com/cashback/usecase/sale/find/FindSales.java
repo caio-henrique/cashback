@@ -1,4 +1,4 @@
-package com.cashback.usecase.sale;
+package com.cashback.usecase.sale.find;
 
 public interface FindSales {
 

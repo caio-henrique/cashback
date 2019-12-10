@@ -6,7 +6,6 @@ import com.cashback.usecase.album.search.repository.albums.FindAlbums;
 import com.cashback.usecase.album.search.repository.albums.FindAlbumsRequest;
 import com.cashback.usecase.album.search.repository.albums.FindAlbumsResponse;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,10 +23,10 @@ public class FindAlbumsImpl implements FindAlbums {
     @Override
     public FindAlbumsResponse execute(FindAlbumsRequest findAlbumsRequest) {
         Page<Album> albums = albumRepository.findByGender(findAlbumsRequest.getGender(), findAlbumsRequest.getPageable());
-        return FindAlbumsResponse.valueOf(this.buildPageAlbums(albums));
+        return this.buildFindAlbumsResponse(albums);
     }
 
-    private Page<com.cashback.usecase.album.search.repository.albums.representation.Album> buildPageAlbums(Page<Album> albums) {
+    private FindAlbumsResponse buildFindAlbumsResponse(Page<Album> albums) {
 
         List<com.cashback.usecase.album.search.repository.albums.representation.Album> collect = albums.get().parallel().map(
                 album -> com.cashback.usecase.album.search.repository.albums.representation.Album.valueOf(
@@ -35,6 +34,7 @@ public class FindAlbumsImpl implements FindAlbums {
                 album.getPrice(), album.getGender()))
                 .collect(Collectors.toList());
 
-        return new PageImpl(collect, albums.getPageable(), albums.getTotalElements());
+        return FindAlbumsResponse.valueOf(collect, albums.getNumberOfElements(), albums.getTotalPages(),
+                albums.getPageable().getPageNumber(), albums.isLast(), albums.isFirst());
     }
 }
